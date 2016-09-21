@@ -18,35 +18,19 @@ class ViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         self.Map.delegate = self
         
-        let locationTitles = [
-            "The Mill",
-            "Subway",
-            "Safewai" ]
+        let brain = BikeBrain()
         
-        let locationSubtitles = [
-            "Coffee shop with bike racks in front.",
-            "Small bike rack in front of shop.",
-            "Bike racks on S Street." ]
-        
-        let locationCoordinates = [
-            CLLocationCoordinate2DMake(38.578312, -121.481122),
-            CLLocationCoordinate2DMake(38.581106, -121.504862),
-            CLLocationCoordinate2DMake(38.567428, -121.486079) ]
-  
-        
-        //set center of map, span to be displayed, create region, set region as default
-        let center = CLLocationCoordinate2DMake(38.572193, -121.486001)
-        let span = MKCoordinateSpanMake (0.08, 0.08)
-        let region = MKCoordinateRegion(center: center, span: span)
+        //create region, set region as default
+        let region = MKCoordinateRegion(center: brain.center, span: brain.span)
         Map.setRegion(region, animated: true)
         
-        
-        for i in 0 ..< locationTitles.count {
+        //iterate through location arrays and place annotations on map
+        for i in 0 ..< brain.locationTitles.count {
             let annotation = MKPointAnnotation()
             mapView(Map, viewForAnnotation: annotation)
-            annotation.coordinate = locationCoordinates[i]
-            annotation.title = locationTitles[i]
-            annotation.subtitle = locationSubtitles[i]
+            annotation.coordinate = brain.locationCoordinates[i]
+            annotation.title = brain.locationTitles[i]
+            annotation.subtitle = brain.locationSubtitles[i]
             Map.addAnnotation(annotation)
        
 
@@ -59,6 +43,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         super.didReceiveMemoryWarning()
         
     }
+    
+    
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
