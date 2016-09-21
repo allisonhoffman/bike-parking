@@ -17,7 +17,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.Map.delegate = self
-        
         let brain = BikeBrain()
         
         //create region, set region as default
@@ -32,26 +31,20 @@ class ViewController: UIViewController, MKMapViewDelegate {
             annotation.title = brain.locationTitles[i]
             annotation.subtitle = brain.locationSubtitles[i]
             Map.addAnnotation(annotation)
-       
-
         }
-    
     }
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
     }
     
     
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-        
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("demo")
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "demo")
@@ -60,11 +53,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         else {
             annotationView!.annotation = annotation
         }
-        
         annotationView!.image = UIImage(named: "bike")
-        
         return annotationView
-        
     }
     
 
