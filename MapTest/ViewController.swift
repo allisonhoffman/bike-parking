@@ -26,7 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //iterate through location arrays and place annotations on map
         for i in 0 ..< brain.locationTitles.count {
             let annotation = MKPointAnnotation()
-            mapView(Map, viewForAnnotation: annotation)
+            mapView(mapView: Map, viewForAnnotation: annotation)
             annotation.coordinate = brain.locationCoordinates[i]
             annotation.title = brain.locationTitles[i]
             annotation.subtitle = brain.locationSubtitles[i]
@@ -45,7 +45,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("demo")
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "demo")
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "demo")
             annotationView!.canShowCallout = true
